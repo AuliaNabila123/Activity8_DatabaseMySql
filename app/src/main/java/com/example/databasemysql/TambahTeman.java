@@ -1,5 +1,6 @@
 package com.example.databasemysql;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -44,13 +45,17 @@ public class TambahTeman extends AppCompatActivity {
         simpanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 SimpanData();
+                Intent inten = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(inten);
+                finish();
             }
         });
     }
     public void SimpanData(){
         if (editNama.getText().toString().equals("")||editTelepon.getText().toString().equals("")){
-            Toast.makeText(TambahTeman.this, "Semua harus diisi data", Toast.LENGTH_LONG).show();
+            Toast.makeText(TambahTeman.this, "Semua harus diisi data", Toast.LENGTH_SHORT).show();
         }
         else{
             nm = editNama.getText().toString();
@@ -66,9 +71,9 @@ public class TambahTeman extends AppCompatActivity {
                         JSONObject jObj = new JSONObject(response);
                         success = jObj.getInt(TAG_SUCCES);
                         if (success == 1) {
-                            Toast.makeText(TambahTeman.this, "Sukses simpan data", Toast.LENGTH_LONG).show();
+                            Toast.makeText(TambahTeman.this, "Sukses simpan data", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(TambahTeman.this, "gagal", Toast.LENGTH_LONG).show();
+                            Toast.makeText(TambahTeman.this, "gagal", Toast.LENGTH_SHORT).show();
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -78,7 +83,7 @@ public class TambahTeman extends AppCompatActivity {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     Log.e(TAG, "Error : "+error.getMessage());
-                    Toast.makeText(TambahTeman.this, "Gagal simpan data", Toast.LENGTH_LONG).show();
+                    Toast.makeText(TambahTeman.this, "Gagal simpan data", Toast.LENGTH_SHORT).show();
                 }
             }){
 
